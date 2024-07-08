@@ -96,14 +96,17 @@ function SpellDetails() {
                             {spellDetails?.classes.map(c => {
                                 const IconComponent = spellClass(c.index);
                                 return IconComponent ? (
-                                    <div className="flex flex-col justify-center items-center">
+                                    <div
+                                        key={c.index}
+                                        className="flex flex-col justify-center items-center"
+                                    >
                                         <div
                                             className={cn(
                                                 "h-10 w-10 rounded-[50%] flex justify-center items-center",
                                                 spellClassColor(c.index)
                                             )}
                                         >
-                                            <IconComponent key={c.index} />
+                                            <IconComponent />
                                         </div>
                                         <span className="text-xs mt-1">
                                             {c.name}

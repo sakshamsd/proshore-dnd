@@ -13,3 +13,7 @@ export const SPELL_CLASS_NAMES = {
     WARLOCK: "warlock",
     WIZARD: "wizard",
 };
+
+export const envConfig = {
+    apiEndpoint: import.meta.env.VITE_ENDPOINT,
+};

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { SpellDetails } from "../services/types";
+import { envConfig } from "../constants";
 
 interface SpellDetailsResponse {
     spellDetails: SpellDetails | null;
@@ -11,7 +12,7 @@ interface SpellDetailsResponse {
 const useGetSpellDetails = (
     index: string | undefined
 ): SpellDetailsResponse => {
-    const url = `https://www.dnd5eapi.co/api/spells/${index}`;
+    const url = `${envConfig.apiEndpoint}/spells/${index}`;
     const [spellDetails, setSpellDetails] = useState<SpellDetails | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
