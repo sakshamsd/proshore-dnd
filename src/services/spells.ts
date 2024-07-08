@@ -1,37 +1,52 @@
 import axios from "axios";
 import {
     FETCH_SPELL_REQUEST,
-    FETCH_SPELL_SUCCCESS,
+    FETCH_SPELL_SUCCESS,
     FETCH_SPELL_ERROR,
     SpellsListResponse,
     FetchSpellRequestType,
     FetchSpellSuccessType,
     FetchSpellErrorType,
+    TOGGLE_FAVORITE_SPELL,
+    ToggleFavoriteSpellType,
 } from "./types.d";
 
 export interface SpellsListState {
     data: SpellsListResponse | null;
     loading: boolean;
     error: string | null;
+    favorites: string[] | null;
 }
 
 const initialState: SpellsListState = {
     data: null,
     loading: false,
     error: null,
+    favorites: null,
 };
 
 export default function spellsReducer(
     state = initialState,
-    action: FetchSpellRequestType | FetchSpellSuccessType | FetchSpellErrorType
+    action:
+        | FetchSpellRequestType
+        | FetchSpellSuccessType
+        | FetchSpellErrorType
+        | ToggleFavoriteSpellType
 ): SpellsListState {
     switch (action.type) {
         case FETCH_SPELL_REQUEST:
             return { ...state, loading: true, error: null };
-        case FETCH_SPELL_SUCCCESS:
+        case FETCH_SPELL_SUCCESS:
             return { ...state, loading: false, data: action.payload };
         case FETCH_SPELL_ERROR:
             return { ...state, loading: false, error: action.payload };
+        case TOGGLE_FAVORITE_SPELL:
+            const spellId: string = action.payload;
+            const favoriteList = state.favorites ? state.favorites : [];
+            const newFavorites = favoriteList.includes(spellId)
+                ? favoriteList.filter(id => id !== spellId)
+                : [...favoriteList, spellId];
+            return { ...state, favorites: newFavorites };
         default:
             return state;
     }
@@ -44,13 +59,20 @@ export const fetchSpellsRequest = (): FetchSpellRequestType => ({
 export const fetchSpellsSuccess = (
     data: SpellsListResponse
 ): FetchSpellSuccessType => ({
-    type: FETCH_SPELL_SUCCCESS,
+    type: FETCH_SPELL_SUCCESS,
     payload: data,
 });
 
 export const fetchSpellsError = (error: string): FetchSpellErrorType => ({
     type: FETCH_SPELL_ERROR,
     payload: error,
+});
+
+export const toggleFavoriteSpell = (
+    index: string
+): ToggleFavoriteSpellType => ({
+    type: TOGGLE_FAVORITE_SPELL,
+    payload: index,
 });
 
 export const getAllSpells = () => async (dispatch: any) => {

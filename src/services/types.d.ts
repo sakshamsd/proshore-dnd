@@ -41,19 +41,24 @@ export interface School {
 }
 
 export const FETCH_SPELL_REQUEST = "FETCH_SPELL_REQUEST";
-export const FETCH_SPELL_SUCCCESS = "FETCH_SPELL_SUCCCESS";
+export const FETCH_SPELL_SUCCESS = "FETCH_SPELL_SUCCESS";
 export const FETCH_SPELL_ERROR = "FETCH_SPELL_ERROR";
-
+export const TOGGLE_FAVORITE_SPELL = "TOGGLE_FAVORITE_SPELL";
 interface FetchSpellRequestType {
     type: typeof FETCH_SPELL_REQUEST;
 }
 
 interface FetchSpellSuccessType {
-    type: typeof FETCH_SPELL_SUCCCESS;
+    type: typeof FETCH_SPELL_SUCCESS;
     payload: SpellsListResponse;
 }
 
 interface FetchSpellErrorType {
     type: typeof FETCH_SPELL_ERROR;
+    payload: string;
+}
+
+interface ToggleFavoriteSpellType {
+    type: typeof TOGGLE_FAVORITE_SPELL;
     payload: string;
 }
