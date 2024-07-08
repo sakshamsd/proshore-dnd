@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export type Primitive = string;
 
 export function sanitizeURL(
@@ -11,4 +14,8 @@ export function sanitizeURL(
     }
 
     return url;
+}
+
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
 }

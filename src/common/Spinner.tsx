@@ -1,4 +1,4 @@
-import { twMerge } from "tailwind-merge";
+import { cn } from "../utils";
 
 interface Props {
     className?: string;
@@ -8,7 +8,7 @@ function Spinner(props: Props) {
     return (
         <div className={"text-center"}>
             <div
-                className={twMerge(
+                className={cn(
                     "inline-block animate-spin h-8 w-8 text-blue-600 rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em]  motion-reduce:animate-[spin_1.5s_linear_infinite]",
                     className
                 )}

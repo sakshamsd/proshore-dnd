@@ -36,7 +36,7 @@ function SpellsList() {
     return (
         <>
             <span className="text-2xl mb-40">Dungeons and Dragon Spell</span>
-            <div className="flex w-full  gap-4 flex-wrap justify-between">
+            <div className="flex w-full mt-6  gap-4 flex-wrap justify-between">
                 {data?.results.map((spell: Result) => {
                     const favorite = favorites?.includes(spell.index);
 
