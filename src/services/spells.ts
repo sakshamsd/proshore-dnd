@@ -10,6 +10,7 @@ import {
     TOGGLE_FAVORITE_SPELL,
     ToggleFavoriteSpellType,
 } from "./types.d";
+import { envConfig } from "../constants";
 
 export interface SpellsListState {
     data: SpellsListResponse | null;
@@ -79,7 +80,7 @@ export const getAllSpells = () => async (dispatch: any) => {
     dispatch(fetchSpellsRequest());
     try {
         const response = await axios.get<SpellsListResponse>(
-            "https://www.dnd5eapi.co/api/spells"
+            `${envConfig.apiEndpoint}/spells`
         );
         dispatch(fetchSpellsSuccess(response.data));
     } catch (error) {
