@@ -32,7 +32,7 @@ export default function SpellCard({
                         handleClick={e => handleToggleFavoite(e, index)}
                     />
                 </div>
-                <div className="h-16 w-16 rounded-[50%] mb-4"></div>
+                <div className="h-16 w-16 rounded-[50%] mb-4 bg-gradient-to-t from-[#f1e1c1]  to-[#fcbc97] border-gray-200 border-2"></div>
                 <div className="text-[#333] text-xl font-semibold">{title}</div>
                 <div className="text-[#859ba8] text-sm">{subtitle}</div>
             </div>

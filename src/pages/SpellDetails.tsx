@@ -13,10 +13,11 @@ import {
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import LikeButton from "../components/like-button";
 import { cn, spellClass, spellClassColor } from "../utils";
+import Spinner from "../common/Spinner";
 
 function SpellDetails() {
     const { id } = useParams();
-    const { spellDetails } = useGetSpellDetails(id);
+    const { spellDetails, loading } = useGetSpellDetails(id);
     const dispatch = useDispatch<any>();
     const navigate = useNavigate();
     const { favorites } = useSelector(
@@ -29,6 +30,10 @@ function SpellDetails() {
     const handleToggleLike = () => {
         dispatch(toggleFavoriteSpell(spellDetails?.index as string));
     };
+
+    if (loading) {
+        return <Spinner />;
+    }
 
     const detailsComponent = (title: string, value: string | undefined) => {
         return (
@@ -47,7 +52,7 @@ function SpellDetails() {
                         <button onClick={() => navigate(-1)}>
                             <ArrowLeftIcon />
                         </button>
-                        <CardTitle className="w-full text-left">
+                        <CardTitle className="w-full text-left text-red-600">
                             {spellDetails?.name}
                         </CardTitle>
 
